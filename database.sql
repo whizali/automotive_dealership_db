@@ -1,17 +1,13 @@
--- Create the Swift Motors database
 CREATE DATABASE SwiftMotors;
 
--- Use the Swift Motors database
 USE SwiftMotors;
 
--- Create the Suppliers table
 CREATE TABLE Suppliers (
     SupplierID INT PRIMARY KEY,
     Name VARCHAR(255),
     ContactInfo VARCHAR(255)
 );
 
--- Create the Customers table
 CREATE TABLE Customers (
     CustomerID INT PRIMARY KEY,
     FirstName VARCHAR(50),
@@ -21,7 +17,6 @@ CREATE TABLE Customers (
     CustomerType VARCHAR(50)
 );
 
--- Create the Employees table
 CREATE TABLE Employees (
     EmployeeID INT PRIMARY KEY,
     FirstName VARCHAR(50),
@@ -30,7 +25,6 @@ CREATE TABLE Employees (
     ContactInfo VARCHAR(255)
 );
 
--- Create the Branches table
 CREATE TABLE Branches (
     BranchID INT PRIMARY KEY,
     Location VARCHAR(255),
@@ -40,7 +34,6 @@ CREATE TABLE Branches (
     FOREIGN KEY (ManagerID) REFERENCES Employees(EmployeeID)
 );
 
--- Create the Vehicles table
 CREATE TABLE Vehicles (
     VehicleID INT PRIMARY KEY,
     Make VARCHAR(255),
@@ -57,7 +50,6 @@ CREATE TABLE Vehicles (
     FOREIGN KEY (BranchID) REFERENCES Branches(BranchID)
 );
 
--- Create the Inventory table
 CREATE TABLE Inventory (
     InventoryID INT PRIMARY KEY,
     BranchID INT,
@@ -73,7 +65,6 @@ CREATE TABLE Inventory (
 
 
 
--- Create the Sales table
 CREATE TABLE Sales (
     SaleID INT PRIMARY KEY,
     VehicleID INT,
@@ -86,7 +77,6 @@ CREATE TABLE Sales (
     FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID)
 );
 
--- Create the Insurance table
 CREATE TABLE Insurance (
     InsuranceID INT PRIMARY KEY,
     PolicyNumber VARCHAR(50),
@@ -97,7 +87,6 @@ CREATE TABLE Insurance (
     FOREIGN KEY (VehicleID) REFERENCES Vehicles(VehicleID)
 );
 
--- Create the Leasing table
 CREATE TABLE Leasing (
     LeaseID INT PRIMARY KEY,
     LeaseNumber VARCHAR(50),
@@ -109,19 +98,16 @@ CREATE TABLE Leasing (
     FOREIGN KEY (VehicleID) REFERENCES Vehicles(VehicleID)
 );
 
--- Insert data into Suppliers table
 INSERT INTO Suppliers (SupplierID, Name, ContactInfo)
 VALUES
     (1, 'JV-Imports', 'manager@jvimports.com'),
     (2, 'JP-Auction', 'manager@japanauction.com');
 
--- Insert data into Customers table
 INSERT INTO Customers (CustomerID, FirstName, LastName, Email, Phone, CustomerType)
 VALUES
     (1, 'Mughal', 'Zia', 'Mughal@example.com', '123-456-7890', 'Buyer'),
     (2, 'Kashif', 'Hassan', 'Kashif@example.com', '987-654-3210', 'Seller');
 
--- Insert data into Employees table
 INSERT INTO Employees (EmployeeID, FirstName, LastName, Position, ContactInfo)
 VALUES
     (101, 'Hassan', 'Mustafa', 'Manager', 'Hassan@swiftmotors.com'),
@@ -136,7 +122,6 @@ VALUES
  	(110, 'Arman', 'Ali', 'Salesperson', 'Arman@swiftmotors.com'),   
 	(111, 'Fahad', 'Waqar', 'Manager', 'Fahad@swiftmotors.com');
 
--- Insert data into Branches table
 INSERT INTO Branches (BranchID, Location, Address, ContactInfo, ManagerID)
 VALUES
     (1, 'Karachi', 'Jauhar Road', '123-456-7890', 101),
@@ -145,7 +130,6 @@ VALUES
     (4, 'Multan', 'Multan Road', '111-777-3333', 109),
 	(5, 'Peshawar', 'Ring Road', '221-777-3333', 111);
 
--- Insert data into Vehicles table
 INSERT INTO Vehicles (VehicleID, Make, Model, Year, Price, Color, Mileage, VIN, Category, EngineCapacity, Transmission, BranchID)
 VALUES 
 (1, 'Toyota', 'Camry', 2020, 25000.00, 'Blue', 15000, 'WAUZZZ8V8KA091321', 'Sedan', 2500, 'Automatic', 1),
@@ -174,7 +158,6 @@ VALUES
 	
 
 
--- Insert data into Inventory table
 INSERT INTO Inventory (InventoryID, BranchID, VehicleID, Quantity, DateReceived, Notes, SupplierID)
 VALUES
     (1, 1, 23, 5, '2023-12-15', 'New stock arrived', 1),
@@ -183,29 +166,17 @@ VALUES
 	(4, 4, 10, 8, '2024-03-15', 'New stock arrived', 1),
     (5, 5, 4, 10, '2024-04-16', 'Limited stock available', 2);
 
--- Insert data into Sales table
 INSERT INTO Sales (SaleID, VehicleID, CustomerID, EmployeeID, SaleDate, SalePrice)
 VALUES
     (1, 1, 1, 102, '2024-04-18', 16000.00),
     (2, 2, 2, 103, '2024-04-19', 18000.00);
 
--- Insert data into Insurance table
 INSERT INTO Insurance (InsuranceID, PolicyNumber, VehicleID, InsuranceCompany, CoverageDetails, ExpirationDate)
 VALUES
     (1, '123456789', 1, 'InsuranceCo', 'Full coverage', '2025-04-18'),
     (2, '987654321', 2, 'InsuranceCo', 'Comprehensive', '2025-04-19');
 
--- Insert data into Leasing table
 INSERT INTO Leasing (LeaseID, LeaseNumber, VehicleID, LesseeName, LeaseStartDate, LeaseEndDate, MonthlyPayment)
 VALUES
     (1, 'A123', 3, 'Leasee1', '2024-04-18', '2025-04-18', 500.00),
     (2, 'B456', 3, 'Leasee2', '2024-04-19', '2025-04-19', 550.00);
-
-
-
-SELECT * FROM Vehicles;
-
-SELECT * INTO OUTFILE '/desktop/uni/2ndSemester/file.csv'
-FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
-FROM your_table;
